@@ -81,8 +81,7 @@ body {
     text-align: center;
 }
 .a {
-    color: #9cff00;
+    color: inherit;
     text-decoration: none;
-    font-size: 18px;
-    transition: color 0.25s ease;
+    font-size: inherit;
 }
