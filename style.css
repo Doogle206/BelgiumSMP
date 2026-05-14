@@ -80,3 +80,9 @@ body {
     padding: 50px 20px;
     text-align: center;
 }
+.a {
+    color: #9cff00;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.25s ease;
+}
