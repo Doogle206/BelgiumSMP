@@ -6,26 +6,26 @@ body {
 }
 
 /* HERO */
-.hero {
+.head {
     text-align: center;
     padding: 40px 20px;
     background: linear-gradient(black, #1a1a1a);
 }
 
-.hero-img {
+.head-img {
     width: 80%;
     max-width: 900px;
     border: 4px solid #ffd900;
     border-radius: 10px;
 }
 
-.hero h1 {
+.head h1 {
     color: #ffd900;
     font-size: 48px;
     margin-top: 20px;
 }
 
-.hero p {
+.head p {
     color: #9cff00;
     font-size: 20px;
 }
