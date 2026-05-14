@@ -5,7 +5,6 @@ body {
     color: white;
 }
 
-/* HERO */
 .head {
     text-align: center;
     padding: 40px 20px;
@@ -30,7 +29,6 @@ body {
     font-size: 20px;
 }
 
-/* SERVER INFO */
 .server-info {
     padding: 50px 20px;
     text-align: center;
@@ -40,59 +38,36 @@ body {
     color: #ffd900;
     font-size: 36px;
 }
+ .season-images {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            gap: 10px;
+        }
 
-.season-images {
-    margin-top: 30px;
-}
+        .season-images img {
+            width: calc((100% - 20px) / 3);
+            max-width: 100%;
+            height: auto;
+        }
 
-.season-images img {
-    width: 250px;
-    margin: 10px;
-    border: 3px solid #9cff00;
-    border-radius: 8px;
-}
+        @media (max-width: 900px) {
+            .season-images {
+                flex-wrap: wrap;
+            }
 
-/* TEAM */
+            .season-images img {
+                width: calc(50% - 10px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .season-images img {
+                width: 100%;
+            }
+        }
 .team {
     background-color: #111;
     padding: 50px 20px;
     text-align: center;
-}
-
-.team h2 {
-    color: #ffd900;
-    font-size: 36px;
-}
-
-.members {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 40px;
-    margin-top: 40px;
-}
-
-.member {
-    background-color: #1a1a1a;
-    padding: 20px;
-    border: 3px solid #9cff00;
-    border-radius: 10px;
-    width: 200px;
-}
-
-.member img {
-    width: 120px;
-    image-rendering: pixelated;
-}
-
-.member h3 {
-    color: #ffd900;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: black;
-    color: gray;
 }
