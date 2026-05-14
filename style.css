@@ -49,6 +49,13 @@ body {
             width: calc((100% - 20px) / 3);
             max-width: 100%;
             height: auto;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .season-images img:hover {
+            transform: scale(1.06);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+            z-index: 1;
         }
 
         @media (max-width: 900px) {
