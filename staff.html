@@ -6,58 +6,81 @@
     <title>Staff</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: #f0f0f0;
-            color: #222;
-        }
-        .container {
-            max-width: 1440px;
-            margin: 0 auto;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #0d0d0d;
+        color: #eee;
+    }
+
+    .container {
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #ffd900;
+        font-size: 42px;
+        letter-spacing: 2px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+
+    .card {
+        background: #161616;
+        border: 2px solid #ffd900;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 0 15px rgba(255, 217, 0, 0.15);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 25px rgba(255, 217, 0, 0.35);
+    }
+
+    .card h2 {
+        font-size: 20px;
+        margin: 0 0 16px;
+        color: #ffd900;
+    }
+
+    .card img {
+        width: 100%;
+        max-width: 180px;
+        height: auto;
+        aspect-ratio: 180 / 432;
+        border-radius: 8px;
+        display: block;
+        margin: 0 auto;
+        object-fit: cover;
+        image-rendering: pixelated;
+        border: 2px solid #9cff00;
+        background: #0d0d0d;
+    }
+
+    @media (max-width: 960px) {
         .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
         }
-        .card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 16px;
-            text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    @media (max-width: 640px) {
+        .grid {
+            grid-template-columns: 1fr;
         }
-        .card h2 {
-            font-size: 18px;
-            margin: 0 0 12px;
-        }
-        .card img {
-            width: 100%;
-            max-width: 180px;
-            height: auto;
-            aspect-ratio: 180 / 432;
-            border-radius: 6px;
-            display: block;
-            margin: 0 auto;
-            object-fit: cover;
-        }
-        @media (max-width: 960px) {
-            .grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 640px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
+    }
+</style>
     </style>
 </head>
 <body>
