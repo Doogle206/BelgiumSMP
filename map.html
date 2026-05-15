@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Server Map</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #0f172a; /* dark background */
+      font-family: Arial, sans-serif;
+    }
+
+    .map-container {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+    }
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .header {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      z-index: 10;
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+      background: rgba(0,0,0,0.5);
+      padding: 10px 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="map-container">
+    <div class="header">Live Server Map</div>
+
+    <iframe src="http://game-p03.mc-node.net:25601/"></iframe>
+  </div>
+</body>
+</html>
