@@ -27,6 +27,10 @@
       overflow-x: hidden;
     }
 
+    body.menu-open {
+      overflow: hidden;
+    }
+
     a {
       text-decoration: none;
       color: inherit;
@@ -35,6 +39,14 @@
     img {
       max-width: 100%;
       display: block;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
 
     .container {
@@ -58,12 +70,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 0;
+      gap: 20px;
     }
 
     .logo {
       font-size: 28px;
       font-weight: 900;
       color: #ff2d2d;
+      flex-shrink: 0;
     }
 
     .nav-links {
@@ -72,9 +86,75 @@
       color: #d4d4d4;
       font-weight: 500;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .nav-links a:hover {
+      color: white;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .menu-toggle span {
+      width: 20px;
+      height: 2px;
+      background: white;
+      border-radius: 999px;
+      transition: 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 86px;
+      left: 16px;
+      right: 16px;
+      background: rgba(10, 10, 10, 0.98);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      z-index: 999;
+    }
+
+    .mobile-menu.active {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 14px;
+      color: #d8d8d8;
+      font-weight: 600;
+    }
+
+    .mobile-menu a:hover {
+      background: rgba(255,255,255,0.06);
       color: white;
     }
 
@@ -296,6 +376,51 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .photo-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 30px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 20px 60px rgba(255, 0, 0, 0.15);
+    }
+
+    .photo-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    .photo-card-content {
+      padding: 22px;
+    }
+
+    .photo-card-content h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .photo-card-content p {
+      color: #aaa;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .photo-card-large {
+      grid-column: span 2;
+    }
+
     .rules-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -391,6 +516,10 @@
         display: none;
       }
 
+      .menu-toggle {
+        display: flex;
+      }
+
       .hero {
         min-height: auto;
         padding-top: 110px;
@@ -434,7 +563,8 @@
         order: -1;
       }
 
-      .hero-image img {
+      .hero-image img,
+      .about img {
         border-radius: 22px;
       }
 
@@ -462,7 +592,8 @@
       .stats,
       .features,
       .about-grid,
-      .rules-grid {
+      .rules-grid,
+      .photo-grid {
         grid-template-columns: 1fr;
         gap: 20px;
       }
@@ -490,10 +621,6 @@
         margin-bottom: 18px;
       }
 
-      .about img {
-        border-radius: 22px;
-      }
-
       .tags {
         gap: 10px;
       }
@@ -503,6 +630,18 @@
         text-align: center;
         padding: 12px 16px;
         border-radius: 14px;
+      }
+
+      .photo-card-large {
+        grid-column: span 1;
+      }
+
+      .photo-card-content {
+        padding: 18px;
+      }
+
+      .photo-card-content h3 {
+        font-size: 22px;
       }
 
       .rule {
@@ -544,7 +683,8 @@
       .hero p,
       .about p,
       .discord-box p,
-      .feature-card p {
+      .feature-card p,
+      .photo-card-content p {
         font-size: 15px;
       }
 
@@ -560,31 +700,51 @@
         width: 100%;
         text-align: center;
       }
+
+      .mobile-menu {
+        top: 78px;
+        left: 12px;
+        right: 12px;
+      }
     }
   </style>
 </head>
 <body>
-
   <header>
     <div class="container">
       <nav aria-label="Hoofdnavigatie">
-        <div class="logo">Belgium SMP</div>
+        <a href="#home" class="logo">Belgium SMP</a>
 
         <div class="nav-links">
           <a href="#home">Home</a>
           <a href="#features">Features</a>
+          <a href="#photos">Foto's</a>
           <a href="#rules">Rules</a>
           <a href="staff.html">Staff</a>
           <a href="#discord">Discord</a>
         </div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </nav>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#photos">Foto's</a>
+        <a href="#rules">Rules</a>
+        <a href="staff.html">Staff</a>
+        <a href="#discord">Discord</a>
+      </div>
     </div>
   </header>
 
   <main>
     <section class="hero" id="home">
       <div class="container hero-content">
-
         <div>
           <div class="badge">🇧🇪 Belgische Minecraft SMP Community</div>
 
@@ -606,12 +766,8 @@
         </div>
 
         <div class="hero-image">
-          <img
-            src="https://images.unsplash.com/photo-1627856014754-2907e2355d06?q=80&w=1200&auto=format&fit=crop"
-            alt="Gaming setup afbeelding voor Belgium SMP"
-          />
+          <img src="images/home.png" alt="Belgium SMP home build" />
         </div>
-
       </div>
     </section>
 
@@ -691,10 +847,7 @@
     <section class="section about">
       <div class="container about-grid">
         <div>
-          <img
-            src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1200&auto=format&fit=crop"
-            alt="Community build sfeerbeeld"
-          />
+          <img src="images/vergaderzaal.png" alt="Belgium SMP vergaderzaal" />
         </div>
 
         <div>
@@ -714,6 +867,49 @@
             <div class="tag">🌍 Survival World</div>
             <div class="tag">🛡️ Anti Cheat</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="photos">
+      <div class="container">
+        <div class="section-title">
+          <h2>Server Foto's</h2>
+          <p>Een kijkje in onze builds, community en survival wereld.</p>
+        </div>
+
+        <div class="photo-grid">
+          <article class="photo-card photo-card-large">
+            <img src="images/home.png" alt="Belgium SMP home build">
+            <div class="photo-card-content">
+              <h3>Home</h3>
+              <p>Een van de mooiste plekken op Belgium SMP en perfect als hoofdafbeelding van de server.</p>
+            </div>
+          </article>
+
+          <article class="photo-card">
+            <img src="images/boot.png" alt="Belgium SMP boot build">
+            <div class="photo-card-content">
+              <h3>Boot</h3>
+              <p>Een unieke build die de stijl en creativiteit van de server laat zien.</p>
+            </div>
+          </article>
+
+          <article class="photo-card">
+            <img src="images/vergaderzaal.png" alt="Belgium SMP vergaderzaal">
+            <div class="photo-card-content">
+              <h3>Vergaderzaal</h3>
+              <p>Een binnenruimte die de community en roleplay-sfeer van de server toont.</p>
+            </div>
+          </article>
+
+          <article class="photo-card">
+            <img src="images/vissers.png" alt="Belgium SMP vissers build">
+            <div class="photo-card-content">
+              <h3>Vissers</h3>
+              <p>Een sfeervolle survival-locatie die perfect past binnen Belgium SMP.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -759,12 +955,7 @@
             en speel samen met de grootste Belgische Minecraft community.
           </p>
 
-          <a
-            href="https://discord.gg/jQHyVaW2mW"
-            class="btn btn-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://discord.gg/jQHyVaW2mW" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
             Join Discord
           </a>
         </aside>
@@ -775,7 +966,7 @@
   <footer>
     <div class="container footer-content">
       <div>
-        <div class="logo">Belgium SMP</div>
+        <a href="#home" class="logo">Belgium SMP</a>
         <p style="color:#777; margin-top:8px;">
           Minecraft Survival Multiplayer Server
         </p>
@@ -784,6 +975,7 @@
       <div class="footer-links">
         <a href="#home">Home</a>
         <a href="#features">Features</a>
+        <a href="#photos">Foto's</a>
         <a href="#rules">Rules</a>
         <a href="staff.html">Staff</a>
         <a href="#discord">Discord</a>
@@ -791,5 +983,38 @@
     </div>
   </footer>
 
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('active');
+      menuToggle.classList.toggle('active', isOpen);
+      menuToggle.setAttribute('aria-expanded', isOpen);
+      document.body.classList.toggle('menu-open', isOpen);
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const clickedInsideMenu = mobileMenu.contains(event.target);
+      const clickedToggle = menuToggle.contains(event.target);
+
+      if (!clickedInsideMenu && !clickedToggle && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      }
+    });
+  </script>
 </body>
 </html>

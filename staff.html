@@ -27,6 +27,10 @@
       overflow-x: hidden;
     }
 
+    body.menu-open {
+      overflow: hidden;
+    }
+
     a {
       text-decoration: none;
       color: inherit;
@@ -35,6 +39,14 @@
     img {
       max-width: 100%;
       display: block;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
 
     .container {
@@ -58,12 +70,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 0;
+      gap: 20px;
     }
 
     .logo {
       font-size: 28px;
       font-weight: 900;
       color: #ff2d2d;
+      flex-shrink: 0;
     }
 
     .nav-links {
@@ -72,10 +86,77 @@
       color: #d4d4d4;
       font-weight: 500;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .nav-links a:hover,
     .nav-links a.active {
+      color: white;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    .menu-toggle span {
+      width: 20px;
+      height: 2px;
+      background: white;
+      border-radius: 999px;
+      transition: 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 86px;
+      left: 16px;
+      right: 16px;
+      background: rgba(10, 10, 10, 0.98);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      z-index: 999;
+    }
+
+    .mobile-menu.active {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 14px;
+      color: #d8d8d8;
+      font-weight: 600;
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu a.active {
+      background: rgba(255,255,255,0.06);
       color: white;
     }
 
@@ -243,6 +324,47 @@
       z-index: 1;
     }
 
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .photo-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 30px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 20px 60px rgba(255, 0, 0, 0.15);
+    }
+
+    .photo-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    .photo-card-content {
+      padding: 22px;
+    }
+
+    .photo-card-content h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .photo-card-content p {
+      color: #aaa;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
     footer {
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       padding: 50px 0;
@@ -289,6 +411,10 @@
         display: none;
       }
 
+      .menu-toggle {
+        display: flex;
+      }
+
       .hero {
         min-height: auto;
         padding-top: 110px;
@@ -326,7 +452,8 @@
         font-size: 16px;
       }
 
-      .grid {
+      .grid,
+      .photo-grid {
         grid-template-columns: 1fr;
         gap: 20px;
       }
@@ -360,9 +487,18 @@
         width: min(100%, 160px);
       }
 
-      .staff-text {
+      .staff-text,
+      .photo-card-content p {
         font-size: 14px;
         line-height: 1.7;
+      }
+
+      .photo-card-content {
+        padding: 18px;
+      }
+
+      .photo-card-content h3 {
+        font-size: 22px;
       }
 
       .footer-content {
@@ -405,24 +541,45 @@
         width: 100%;
         text-align: center;
       }
+
+      .mobile-menu {
+        top: 78px;
+        left: 12px;
+        right: 12px;
+      }
     }
   </style>
 </head>
 <body>
-
   <header>
     <div class="container">
       <nav aria-label="Hoofdnavigatie">
-        <div class="logo">Belgium SMP</div>
+        <a href="index.html#home" class="logo">Belgium SMP</a>
 
         <div class="nav-links">
           <a href="index.html#home">Home</a>
           <a href="index.html#features">Features</a>
+          <a href="index.html#photos">Foto's</a>
           <a href="index.html#rules">Rules</a>
           <a href="staff.html" class="active">Staff</a>
           <a href="index.html#discord">Discord</a>
         </div>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </nav>
+
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#photos">Foto's</a>
+        <a href="index.html#rules">Rules</a>
+        <a href="staff.html" class="active">Staff</a>
+        <a href="index.html#discord">Discord</a>
+      </div>
     </div>
   </header>
 
@@ -531,12 +688,55 @@
         </div>
       </div>
     </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Server Sfeerbeelden</h2>
+          <p>Een kleine selectie van builds en plekken op Belgium SMP.</p>
+        </div>
+
+        <div class="photo-grid">
+          <article class="photo-card">
+            <img src="images/home.png" alt="Belgium SMP home build">
+            <div class="photo-card-content">
+              <h3>Home</h3>
+              <p>Een van de bekendste plekken van de server.</p>
+            </div>
+          </article>
+
+          <article class="photo-card">
+            <img src="images/boot.png" alt="Belgium SMP boot build">
+            <div class="photo-card-content">
+              <h3>Boot</h3>
+              <p>Een creatieve build die de stijl van de community toont.</p>
+            </div>
+          </article>
+
+          <article class="photo-card">
+            <img src="images/vergaderzaal.png" alt="Belgium SMP vergaderzaal">
+            <div class="photo-card-content">
+              <h3>Vergaderzaal</h3>
+              <p>Een strakke binnenlocatie met veel detail.</p>
+            </div>
+          </article>
+
+          <article class="photo-card">
+            <img src="images/vissers.png" alt="Belgium SMP vissers build">
+            <div class="photo-card-content">
+              <h3>Vissers</h3>
+              <p>Een sfeervol deel van de survivalwereld.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
     <div class="container footer-content">
       <div>
-        <div class="logo">Belgium SMP</div>
+        <a href="index.html#home" class="logo">Belgium SMP</a>
         <p style="color:#777; margin-top:8px;">
           Minecraft Survival Multiplayer Server
         </p>
@@ -545,6 +745,7 @@
       <div class="footer-links">
         <a href="index.html#home">Home</a>
         <a href="index.html#features">Features</a>
+        <a href="index.html#photos">Foto's</a>
         <a href="index.html#rules">Rules</a>
         <a href="staff.html">Staff</a>
         <a href="index.html#discord">Discord</a>
@@ -552,5 +753,38 @@
     </div>
   </footer>
 
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('active');
+      menuToggle.classList.toggle('active', isOpen);
+      menuToggle.setAttribute('aria-expanded', isOpen);
+      document.body.classList.toggle('menu-open', isOpen);
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const clickedInsideMenu = mobileMenu.contains(event.target);
+      const clickedToggle = menuToggle.contains(event.target);
+
+      if (!clickedInsideMenu && !clickedToggle && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      }
+    });
+  </script>
 </body>
 </html>
