@@ -1,153 +1,795 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <title>Belgium SMP</title>
-    <style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belgium SMP | Minecraft Survival Server</title>
 
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #0d0d0d;
-    color: white;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 
-.head {
-    text-align: center;
-    padding: 40px 20px;
-    background: linear-gradient(black, #1a1a1a);
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.head-img {
-    width: 80%;
-    max-width: 900px;
-    border: 4px solid #ffd900;
-    border-radius: 10px;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.head h1 {
-    color: #ffd900;
-    font-size: 48px;
-    margin-top: 20px;
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #050505;
+      color: white;
+      overflow-x: hidden;
+    }
 
-.head p {
-    color: #9cff00;
-    font-size: 20px;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.server-info {
-    padding: 50px 20px;
-    text-align: center;
-}
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-.server-info h2 {
-    color: #ffd900;
-    font-size: 36px;
-}
- .season-images {
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: space-between;
-            gap: 10px;
-        }
+    .container {
+      width: 90%;
+      max-width: 1300px;
+      margin: auto;
+    }
 
-        .season-images img {
-            width: calc((100% - 20px) / 3);
-            max-width: 100%;
-            height: auto;
-            border: 4px solid #ffd900;
-            border-radius: 10px;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-        }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-        .season-images img:hover {
-            transform: scale(1.06);
-            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
-            z-index: 1;
-        }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
 
-        @media (max-width: 900px) {
-            .season-images {
-                flex-wrap: wrap;
-            }
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: #ff2d2d;
+    }
 
-            .season-images img {
-                width: calc(50% - 10px);
-            }
-        }
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      color: #d4d4d4;
+      font-weight: 500;
+      flex-wrap: wrap;
+    }
 
-        @media (max-width: 600px) {
-            .season-images img {
-                width: 100%;
-            }
-        }
-.team {
-    background-color: #111;
-    padding: 50px 20px;
-    text-align: center;
-}
-a {
-    text-decoration: none;
-    color: inherit;
-}
-.regels { 
-    background-color: #111; 
-    padding: 50px 20px; 
-    text-align: center; 
-}
-.regels a {
-    color: #ff2b2b;
-    font-size: 28px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
+    .nav-links a:hover {
+      color: white;
+    }
 
-.regels a:hover {
-    color: #ff5555;
-}
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(circle at top, rgba(255, 0, 0, 0.25), transparent 40%),
+        linear-gradient(to bottom, #0a0a0a, #050505);
+      padding-top: 100px;
+    }
 
+    .hero-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 60px;
+      align-items: center;
+    }
 
-</style>
+    .badge {
+      display: inline-block;
+      padding: 10px 18px;
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid rgba(255, 0, 0, 0.25);
+      border-radius: 999px;
+      margin-bottom: 25px;
+      color: #ff6b6b;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: 72px;
+      line-height: 1;
+      font-weight: 900;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #ff2d2d;
+    }
+
+    .hero p {
+      color: #b5b5b5;
+      font-size: 20px;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 16px 28px;
+      border-radius: 18px;
+      font-weight: 700;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #ff2d2d;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #ff4444;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-image img {
+      width: 100%;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 60px rgba(255, 0, 0, 0.2);
+      object-fit: cover;
+    }
+
+    .section {
+      padding: 120px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-title h2 {
+      font-size: 52px;
+      margin-bottom: 15px;
+      font-weight: 900;
+    }
+
+    .section-title p {
+      color: #999;
+      font-size: 18px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 40px;
+      border-radius: 30px;
+      text-align: center;
+    }
+
+    .stat-card h2 {
+      font-size: 48px;
+      color: #ff2d2d;
+      margin-bottom: 10px;
+    }
+
+    .stat-card p {
+      color: #aaa;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 30px;
+      padding: 40px;
+      transition: 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .feature-icon {
+      width: 65px;
+      height: 65px;
+      border-radius: 20px;
+      background: rgba(255, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+
+    .feature-card h3 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    .feature-card p {
+      color: #aaa;
+      line-height: 1.7;
+    }
+
+    .about {
+      background: rgba(255, 255, 255, 0.03);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about img {
+      width: 100%;
+      border-radius: 30px;
+      object-fit: cover;
+    }
+
+    .about h2 {
+      font-size: 52px;
+      margin-bottom: 25px;
+      font-weight: 900;
+    }
+
+    .about p {
+      color: #b5b5b5;
+      line-height: 1.8;
+      margin-bottom: 25px;
+      font-size: 18px;
+    }
+
+    .tags {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .tag {
+      padding: 14px 20px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 60px;
+    }
+
+    .rule {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .rule-number {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: #ff2d2d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: black;
+      flex-shrink: 0;
+    }
+
+    .discord-box {
+      padding: 50px;
+      border-radius: 35px;
+      background: linear-gradient(to bottom right, rgba(255, 0, 0, 0.2), transparent);
+      border: 1px solid rgba(255, 0, 0, 0.2);
+    }
+
+    .discord-box h2 {
+      font-size: 48px;
+      margin: 20px 0;
+      font-weight: 900;
+    }
+
+    .discord-box p {
+      color: #c9c9c9;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 50px 0;
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 25px;
+      color: #aaa;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        width: calc(100% - 32px);
+      }
+
+      header {
+        background: rgba(0, 0, 0, 0.88);
+      }
+
+      nav {
+        padding: 14px 0;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 110px;
+        padding-bottom: 50px;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 17px;
+        line-height: 1.7;
+        margin-bottom: 24px;
+      }
+
+      .badge {
+        font-size: 14px;
+        padding: 8px 14px;
+        margin-bottom: 18px;
+      }
+
+      .buttons {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+        padding: 15px 20px;
+        border-radius: 16px;
+      }
+
+      .hero-image {
+        order: -1;
+      }
+
+      .hero-image img {
+        border-radius: 22px;
+      }
+
+      .section {
+        padding: 75px 0;
+      }
+
+      .section-title {
+        margin-bottom: 36px;
+      }
+
+      .section-title h2,
+      .about h2,
+      .discord-box h2 {
+        font-size: 32px;
+        line-height: 1.1;
+      }
+
+      .section-title p,
+      .about p,
+      .discord-box p {
+        font-size: 16px;
+      }
+
+      .stats,
+      .features,
+      .about-grid,
+      .rules-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .stat-card,
+      .feature-card,
+      .discord-box {
+        padding: 24px;
+        border-radius: 24px;
+      }
+
+      .stat-card h2 {
+        font-size: 38px;
+      }
+
+      .feature-card h3 {
+        font-size: 24px;
+      }
+
+      .feature-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+        border-radius: 18px;
+        margin-bottom: 18px;
+      }
+
+      .about img {
+        border-radius: 22px;
+      }
+
+      .tags {
+        gap: 10px;
+      }
+
+      .tag {
+        width: 100%;
+        text-align: center;
+        padding: 12px 16px;
+        border-radius: 14px;
+      }
+
+      .rule {
+        padding: 18px;
+        border-radius: 18px;
+        gap: 14px;
+        align-items: flex-start;
+      }
+
+      .rule-number {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        font-size: 14px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .section-title h2,
+      .about h2,
+      .discord-box h2 {
+        font-size: 28px;
+      }
+
+      .hero p,
+      .about p,
+      .discord-box p,
+      .feature-card p {
+        font-size: 15px;
+      }
+
+      .stat-card,
+      .feature-card,
+      .discord-box,
+      .rule {
+        padding: 20px;
+      }
+
+      .badge {
+        font-size: 13px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <header class="head">
-        <img src="img/BELGUIM-HARDCORE-SMP-20-12-2025.gif" class="head-img" alt="Belgium Hardcore SMP animated server banner with stylized text and Minecraft themed graphics"><br>
-        <video width="600" height="400" controls>
-            <source id="mp4_src" src="https://cdn.discordapp.com/attachments/1454989424562798642/1500870655514509392/intro_s5.mp4?ex=6a0882b9&is=6a073139&hm=eb2a64c54d4e07fb5e98ebfbb9b78c1f6591e42a9ccb6b025232e67e72115b3c&" type="video/mp4">
-        </video>
-    </header>
+  <header>
+    <div class="container">
+      <nav aria-label="Hoofdnavigatie">
+        <div class="logo">Belgium SMP</div>
 
-    <section class="server-info">
-        <h2>Over de Server</h2>
-        <p>
-            Wat tekst , ik heb geen flauw idee wat ik hier moet zettenaaaaaaaa.
-        </p>
-
-        <div class="season-images">
-            <img src="img/season1.png" alt="foto van het seizoen">
-            <img src="img/season2.png" alt="foto van het seizoen">
-            <img src="img/season3.png" alt="foto van het seizoen">
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#features">Features</a>
+          <a href="#rules">Rules</a>
+          <a href="staff.html">Staff</a>
+          <a href="#discord">Discord</a>
         </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+
+        <div>
+          <div class="badge">🇧🇪 Belgische Minecraft SMP Community</div>
+
+          <h1>Welkom bij <span>Belgium SMP</span></h1>
+
+          <p>
+            Een premium Minecraft Survival Multiplayer server voor België en Nederland.
+            Bouw steden, maak vrienden, handel met spelers en beleef unieke survival gameplay.
+          </p>
+
+          <div class="buttons">
+            <a href="https://belgiumsmp.be/join" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Join de Server</a>
+            <a href="#discord" class="btn btn-secondary">Discord</a>
+          </div>
+
+          <p style="margin-top: 30px; font-size: 16px; color: #888;">
+            Server IP: <strong style="color:white;">play.belgiumsmp.be</strong>
+          </p>
+        </div>
+
+        <div class="hero-image">
+          <img
+            src="https://images.unsplash.com/photo-1627856014754-2907e2355d06?q=80&w=1200&auto=format&fit=crop"
+            alt="Gaming setup afbeelding voor Belgium SMP"
+          />
+        </div>
+
+      </div>
     </section>
 
-    <section class="team">
-        
+    <section class="section" aria-label="Statistieken">
+      <div class="container">
+        <div class="stats">
+          <article class="stat-card">
+            <h2>500+</h2>
+            <p>Actieve spelers</p>
+          </article>
 
-        <h2>Het Staff Team</h2>
-        
-        <a href="staff.html">
-            <img src="img/staff.png" alt="Foto van het staff team">
-        </a>
+          <article class="stat-card">
+            <h2>2K+</h2>
+            <p>Discord leden</p>
+          </article>
 
+          <article class="stat-card">
+            <h2>25+</h2>
+            <p>Custom plugins</p>
+          </article>
+
+          <article class="stat-card">
+            <h2>10+</h2>
+            <p>Events per maand</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section class="regels">
-         <a href="regels.html">
-        Regels
-         </a>
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>Waarom Belgium SMP?</h2>
+          <p>Alles wat je nodig hebt voor de ultieme Minecraft survival ervaring.</p>
+        </div>
+
+        <div class="features">
+          <article class="feature-card">
+            <div class="feature-icon">⛏️</div>
+            <h3>Survival Economy</h3>
+            <p>Verdien geld, open shops en trade met andere spelers in een actieve economie.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>Claims & Protectie</h3>
+            <p>Bescherm je builds tegen griefers met een geavanceerd claimsysteem.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">⚔️</div>
+            <h3>Custom Events</h3>
+            <p>Neem deel aan PvP events, build battles en grote community uitdagingen.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🌍</div>
+            <h3>Crossplay</h3>
+            <p>Speel samen op Java én Bedrock Edition zonder problemen.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">👑</div>
+            <h3>Actieve Staff</h3>
+            <p>Een professioneel team houdt de server veilig, eerlijk en leuk.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🚀</div>
+            <h3>24/7 Online</h3>
+            <p>Stabiele performance en snelle servers voor een lagvrije ervaring.</p>
+          </article>
+        </div>
+      </div>
     </section>
-    
+
+    <section class="section about">
+      <div class="container about-grid">
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1639152201720-5e536d254d81?q=80&w=1200&auto=format&fit=crop"
+            alt="Community build sfeerbeeld"
+          />
+        </div>
+
+        <div>
+          <h2>Een echte survival community</h2>
+
+          <p>
+            Belgium SMP draait volledig rond community, creativiteit en langdurige survival gameplay.
+            Bouw gigantische steden, maak allianties of start je eigen economie.
+          </p>
+
+          <p>
+            Dankzij custom plugins, events en actieve spelers blijft de server altijd levendig en uniek.
+          </p>
+
+          <div class="tags">
+            <div class="tag">⚡ 24/7 Online</div>
+            <div class="tag">🌍 Survival World</div>
+            <div class="tag">🛡️ Anti Cheat</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="rules">
+      <div class="container rules-grid">
+        <div>
+          <div class="section-title" style="text-align:left; margin-bottom:40px;">
+            <h2>Server Regels</h2>
+            <p>Hou Belgium SMP leuk en eerlijk voor iedereen.</p>
+          </div>
+
+          <div class="rule">
+            <div class="rule-number">1</div>
+            <div>Geen griefing of stelen</div>
+          </div>
+
+          <div class="rule">
+            <div class="rule-number">2</div>
+            <div>Respecteer alle spelers</div>
+          </div>
+
+          <div class="rule">
+            <div class="rule-number">3</div>
+            <div>Geen hacks of cheats</div>
+          </div>
+
+          <div class="rule">
+            <div class="rule-number">4</div>
+            <div>Geen spam of toxic gedrag</div>
+          </div>
+        </div>
+
+        <aside class="discord-box" id="discord">
+          <div style="color:#ff6b6b; letter-spacing:4px; text-transform:uppercase; font-size:14px;">
+            Discord Community
+          </div>
+
+          <h2>Join de Community</h2>
+
+          <p>
+            Praat met spelers, blijf op de hoogte van updates, neem deel aan giveaways
+            en speel samen met de grootste Belgische Minecraft community.
+          </p>
+
+          <a
+            href="https://discord.gg/jQHyVaW2mW"
+            class="btn btn-primary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Join Discord
+          </a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <div class="logo">Belgium SMP</div>
+        <p style="color:#777; margin-top:8px;">
+          Minecraft Survival Multiplayer Server
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#rules">Rules</a>
+        <a href="staff.html">Staff</a>
+        <a href="#discord">Discord</a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>

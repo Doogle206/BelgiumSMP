@@ -1,117 +1,556 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff</title>
-    <style>
-        
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belgium SMP | Staff</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background: #0d0d0d;
-        color: #eee;
+      font-family: 'Inter', sans-serif;
+      background: #050505;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
     }
 
     .container {
-        max-width: 1440px;
-        margin: 0 auto;
+      width: 90%;
+      max-width: 1300px;
+      margin: auto;
     }
 
-    h1 {
-        text-align: center;
-        margin-bottom: 30px;
-        color: #ffd900;
-        font-size: 42px;
-        letter-spacing: 2px;
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: #ff2d2d;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      color: #d4d4d4;
+      font-weight: 500;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: white;
+    }
+
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(circle at top, rgba(255, 0, 0, 0.25), transparent 40%),
+        linear-gradient(to bottom, #0a0a0a, #050505);
+      padding-top: 120px;
+      padding-bottom: 60px;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 10px 18px;
+      background: rgba(255, 0, 0, 0.1);
+      border: 1px solid rgba(255, 0, 0, 0.25);
+      border-radius: 999px;
+      margin-bottom: 25px;
+      color: #ff6b6b;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-size: 72px;
+      line-height: 1;
+      font-weight: 900;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #ff2d2d;
+    }
+
+    .hero p {
+      color: #b5b5b5;
+      font-size: 20px;
+      line-height: 1.8;
+      margin: 0 auto;
+      max-width: 780px;
+    }
+
+    .section {
+      padding: 110px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .section-title h2 {
+      font-size: 52px;
+      margin-bottom: 15px;
+      font-weight: 900;
+    }
+
+    .section-title p {
+      color: #999;
+      font-size: 18px;
     }
 
     .grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: 30px;
     }
 
     .card {
-        background: #161616;
-        border: 2px solid #ffd900;
-        border-radius: 12px;
-        padding: 20px;
-        text-align: center;
-        box-shadow: 0 0 15px rgba(255, 217, 0, 0.15);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 30px;
+      padding: 36px;
+      text-align: center;
+      transition: 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255, 45, 45, 0.12), transparent 55%);
+      pointer-events: none;
     }
 
     .card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 25px rgba(255, 217, 0, 0.35);
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 20px 60px rgba(255, 0, 0, 0.15);
+    }
+
+    .card.owner {
+      border-color: rgba(255, 45, 45, 0.3);
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 45, 45, 0.04));
+    }
+
+    .rank {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255, 0, 0, 0.12);
+      border: 1px solid rgba(255, 0, 0, 0.2);
+      color: #ff7d7d;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
     }
 
     .card h2 {
-        font-size: 20px;
-        margin: 0 0 16px;
-        color: #ffd900;
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
     }
 
-    .card img {
+    .discord-name {
+      color: #a7a7a7;
+      font-size: 17px;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .skin-frame {
+      position: relative;
+      z-index: 1;
+      border-radius: 26px;
+      padding: 24px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 22px;
+      min-height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .skin-frame img {
+      width: min(100%, 220px);
+      height: auto;
+      image-rendering: pixelated;
+      filter: drop-shadow(0 18px 30px rgba(255, 0, 0, 0.2));
+    }
+
+    .staff-text {
+      color: #b5b5b5;
+      line-height: 1.8;
+      font-size: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 50px 0;
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 25px;
+      color: #aaa;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        width: calc(100% - 32px);
+      }
+
+      header {
+        background: rgba(0, 0, 0, 0.88);
+      }
+
+      nav {
+        padding: 14px 0;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 110px;
+        padding-bottom: 44px;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 17px;
+        line-height: 1.7;
+      }
+
+      .badge {
+        font-size: 14px;
+        padding: 8px 14px;
+        margin-bottom: 18px;
+      }
+
+      .section {
+        padding: 75px 0;
+      }
+
+      .section-title {
+        margin-bottom: 36px;
+      }
+
+      .section-title h2 {
+        font-size: 32px;
+      }
+
+      .section-title p {
+        font-size: 16px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .card {
+        padding: 24px;
+        border-radius: 24px;
+      }
+
+      .card h2 {
+        font-size: 24px;
+      }
+
+      .discord-name {
+        font-size: 15px;
+        margin-bottom: 18px;
+      }
+
+      .rank {
+        font-size: 12px;
+        padding: 8px 12px;
+      }
+
+      .skin-frame {
+        min-height: 240px;
+        padding: 18px;
+        border-radius: 20px;
+      }
+
+      .skin-frame img {
+        width: min(100%, 160px);
+      }
+
+      .staff-text {
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-links {
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .section-title h2 {
+        font-size: 28px;
+      }
+
+      .hero p,
+      .section-title p,
+      .staff-text {
+        font-size: 15px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .skin-frame {
+        min-height: 210px;
+        padding: 14px;
+      }
+
+      .badge {
+        font-size: 13px;
         width: 100%;
-        max-width: 180px;
-        height: auto;
-        aspect-ratio: 180 / 432;
-        border-radius: 8px;
-        display: block;
-        margin: 0 auto;
-        object-fit: cover;
+        text-align: center;
+      }
     }
-
-    @media (max-width: 960px) {
-        .grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 640px) {
-        .grid {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>
-    </style>
+  </style>
 </head>
 <body>
+
+  <header>
     <div class="container">
-        <h1>Staff</h1>
-        <div class="grid">
-            <div class="card">
-                <h2>Zwente</h2>
-                <img src="https://mc-heads.net/body/wood_gost" alt="Naam 1" width="432" height="180">
-            </div>
-            <div class="card">
-                <h2>Willoos_spie</h2>
-                <img src="https://mc-heads.net/body/Willoos_spie" alt="Naam 2" width="432" height="180">
-            </div>
-            <div class="card">
-                <h2>Alexander</h2>
-                <img src="https://mc-heads.net/body/Itsalexi_" alt="Naam 3" width="432" height="180">
-            </div>
-            <div class="card">
-                <h2>Doogle</h2>
-                <img src="https://mc-heads.net/body/Doogle" alt="Naam 4" width="432" height="180">
-            </div>
-            <div class="card">
-                <h2>Lennart</h2>
-                <img src="https://mc-heads.net/body/Tc_Zeonx" alt="Naam 5" width="432" height="180">
-            </div>
-            <div class="card">
-                <h2>Dynos</h2>
-                <img src="https://mc-heads.net/body/Dynos10" alt="Naam 6" width="432" height="180">
-            </div>
-            <div class="card">
-                <h2>Bolt</h2>
-                <img src="https://mc-heads.net/body/TheDragonBolt" alt="Naam 7" width="432" height="180">
-            </div>
+      <nav aria-label="Hoofdnavigatie">
+        <div class="logo">Belgium SMP</div>
+
+        <div class="nav-links">
+          <a href="index.html#home">Home</a>
+          <a href="index.html#features">Features</a>
+          <a href="index.html#rules">Rules</a>
+          <a href="staff.html" class="active">Staff</a>
+          <a href="index.html#discord">Discord</a>
         </div>
+      </nav>
     </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="badge">👑 Belgium SMP Staff Team</div>
+        <h1>Ons <span>Staffteam</span></h1>
+        <p>
+          Hier zie je alle staffleden van Belgium SMP met hun Minecraft skin, naam en rol.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Alle Staffleden</h2>
+          <p>Jouw kaart staat bovenaan als owner, gevolgd door de rest van het team.</p>
+        </div>
+
+        <div class="grid">
+          <article class="card owner">
+            <div class="rank">Owner</div>
+            <h2>wood_gost</h2>
+            <div class="discord-name">jentesuys</div>
+            <div class="skin-frame">
+              <img src="https://mc-heads.net/body/wood_gost" alt="Minecraft skin van wood_gost" width="220" height="300">
+            </div>
+            <p class="staff-text">
+              Oprichter van Belgium SMP en verantwoordelijk voor de richting, ontwikkeling en community van de server.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="rank">Owner</div>
+            <h2>Willoos_spie</h2>
+            <div class="discord-name">Willoos_spie</div>
+            <div class="skin-frame">
+              <img src="https://mc-heads.net/body/Willoos_spie" alt="Minecraft skin van Willoos_spie" width="220" height="300">
+            </div>
+            <p class="staff-text">
+              Mede-eigenaar van Belgium SMP en betrokken bij de werking en community van de server.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="rank">Admin</div>
+            <h2>Itsalexi_</h2>
+            <div class="discord-name">Alexander</div>
+            <div class="skin-frame">
+              <img src="https://mc-heads.net/body/Itsalexi_" alt="Minecraft skin van Itsalexi_" width="220" height="300">
+            </div>
+            <p class="staff-text">
+              Actief stafflid dat helpt met support, moderatie en het begeleiden van spelers.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="rank">Developer</div>
+            <h2>Doogle</h2>
+            <div class="discord-name">Doogle</div>
+            <div class="skin-frame">
+              <img src="https://mc-heads.net/body/Doogle" alt="Minecraft skin van Doogle" width="220" height="300">
+            </div>
+            <p class="staff-text">
+              Werkt mee aan technische verbeteringen en helpt bij serverproblemen en nieuwe features.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="rank">Manager</div>
+            <h2>Tc_Zeonx</h2>
+            <div class="discord-name">Lennart</div>
+            <div class="skin-frame">
+              <img src="https://mc-heads.net/body/Tc_Zeonx" alt="Minecraft skin van Tc_Zeonx" width="220" height="300">
+            </div>
+            <p class="staff-text">
+              Ondersteunt events en zorgt mee voor een eerlijke en leuke survivalervaring voor iedereen.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="rank">Mod</div>
+            <h2>Dynos10</h2>
+            <div class="discord-name">Dynos</div>
+            <div class="skin-frame">
+              <img src="https://mc-heads.net/body/Dynos10" alt="Minecraft skin van Dynos10" width="220" height="300">
+            </div>
+            <p class="staff-text">
+              Stafflid dat mee helpt met support, toezicht en het netjes houden van de community.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="rank">Mod</div>
+            <h2>TheDragonBolt</h2>
+            <div class="discord-name">Bolt</div>
+            <div class="skin-frame">
+              <img src="https://mc-heads.net/body/TheDragonBolt" alt="Minecraft skin van TheDragonBolt" width="220" height="300">
+            </div>
+            <p class="staff-text">
+              Helpt spelers met vragen en meldingen en ondersteunt mee de algemene serverwerking.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <div class="logo">Belgium SMP</div>
+        <p style="color:#777; margin-top:8px;">
+          Minecraft Survival Multiplayer Server
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#rules">Rules</a>
+        <a href="staff.html">Staff</a>
+        <a href="index.html#discord">Discord</a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
